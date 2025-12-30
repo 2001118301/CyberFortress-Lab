@@ -77,7 +77,7 @@ The first defense layer is **Network Segmentation**. Using OPNsense, I configure
 ![OPNsense Interfaces](screenshots/04_opnsense_interfaces_overview.png)
 *Figure 1: Interface assignment in OPNsense ensuring physical/logical separation.*
 
-> 📘 **Detailed Guide**: See [Day 1 Quickstart](docs/DAY1_QUICKSTART.md) for interface configuration details.
+> 📘 **Detailed Guide**: See [Setup Guide](docs/SETUP_GUIDE.md) for interface configuration details.
 
 ---
 
@@ -109,7 +109,7 @@ Using **Metasploit Framework**, I executed a controlled attack chain against the
 ![Exploit Success](screenshots/08_exploit_success_root_shell.png)
 *Figure 2: Metasploit console showing successful root shell acquisition.*
 
-> 📕 **Attack Diary**: Full attack logs and methodology are documented in [Day 2 Attacks](docs/DAY2_ATTACKS.md).
+> 📕 **Attack Guide**: Full attack logs and methodology are documented in [Attack Guide](docs/ATTACK_GUIDE.md).
 
 ---
 

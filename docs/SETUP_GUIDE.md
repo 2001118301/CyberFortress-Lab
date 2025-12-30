@@ -1,4 +1,4 @@
-# 🚀 Day 1 Quick-Start Guide - SecureNet Lab
+# 🚀 Environment Setup Guide - SecureNet Lab
 
 ## Step 1: VirtualBox Network Setup (10 minutes)
 

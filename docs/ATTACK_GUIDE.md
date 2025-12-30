@@ -1,4 +1,4 @@
-# 💥 Day 2 Attack Simulation Guide - SecureNet Lab
+# 💥 Attack Simulation Guide - SecureNet Lab
 
 ## Pre-Attack Setup (5 minutes)
 
@@ -211,4 +211,4 @@ exploit
 
 ---
 
-**Good luck with Day 2! Remember to take screenshots of everything!**
+**Good luck! Remember to take screenshots of everything!**
