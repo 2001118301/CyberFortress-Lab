@@ -1,0 +1,66 @@
+# ==============================================================================
+# SecureNet Lab - Custom Suricata Detection Rules
+# Author: [Your Name]
+# Date: December 2024
+# Description: Custom IDS rules for detecting attack patterns in lab environment
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Rule 1: Detect Nmap SYN Scan
+# Triggers when 20+ SYN packets are sent within 5 seconds from same source
+# Common indicator of port scanning reconnaissance
+# ------------------------------------------------------------------------------
+alert tcp any any -> $HOME_NET any (msg:"[RECON] Nmap SYN Scan Detected"; flags:S; threshold:type threshold, track by_src, count 20, seconds 5; classtype:attempted-recon; sid:1000001; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 2: Detect FTP Login Attempts
+# Monitors for FTP USER commands indicating login attempts
+# Useful for detecting unauthorized access attempts to FTP services
+# ------------------------------------------------------------------------------
+alert tcp any any -> $HOME_NET 21 (msg:"[AUTH] FTP Login Attempt"; content:"USER"; nocase; classtype:attempted-user; sid:1000002; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 3: Detect SSH Brute Force
+# Triggers when 5+ SSH connections from same source within 60 seconds
+# Indicates possible password guessing attack
+# ------------------------------------------------------------------------------
+alert tcp any any -> $HOME_NET 22 (msg:"[BRUTE] SSH Brute Force Attempt"; flow:to_server; threshold:type threshold, track by_src, count 5, seconds 60; classtype:attempted-admin; sid:1000003; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 4: Detect Metasploit vsftpd Backdoor Connection
+# The vsftpd 2.3.4 backdoor opens a root shell on port 6200
+# Critical indicator of successful exploitation
+# ------------------------------------------------------------------------------
+alert tcp any any -> $HOME_NET 6200 (msg:"[EXPLOIT] vsftpd 2.3.4 Backdoor Connection"; flow:established; classtype:trojan-activity; sid:1000004; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 5: Detect SMB/Samba Enumeration
+# Monitors for SMB protocol traffic indicating enumeration attempts
+# Common in Windows/Samba network reconnaissance
+# ------------------------------------------------------------------------------
+alert tcp any any -> $HOME_NET 445 (msg:"[RECON] SMB Enumeration Detected"; flow:to_server; content:"|ff|SMB"; classtype:attempted-recon; sid:1000005; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 6: Detect ICMP Ping Sweep
+# Triggers when 10+ ICMP packets sent within 3 seconds
+# Indicates network discovery/host enumeration
+# ------------------------------------------------------------------------------
+alert icmp any any -> $HOME_NET any (msg:"[RECON] ICMP Ping Sweep Detected"; threshold:type threshold, track by_src, count 10, seconds 3; classtype:icmp-event; sid:1000006; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 7: Detect Telnet Connection Attempts
+# Monitors for Telnet connections which transmit credentials in cleartext
+# Security policy violation in most environments
+# ------------------------------------------------------------------------------
+alert tcp any any -> $HOME_NET 23 (msg:"[POLICY] Telnet Connection Attempt"; flow:to_server; classtype:attempted-user; sid:1000007; rev:1;)
+
+# ------------------------------------------------------------------------------
+# Rule 8: Detect IRC Traffic (Potential C2 Channel)
+# IRC is commonly used for botnet command-and-control
+# May indicate compromised host communicating with C2 server
+# ------------------------------------------------------------------------------
+alert tcp any any -> any 6667 (msg:"[C2] IRC Traffic Detected - Possible Command & Control"; flow:established; classtype:policy-violation; sid:1000008; rev:1;)
+
+# ==============================================================================
+# END OF CUSTOM RULES
+# ==============================================================================
