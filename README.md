@@ -77,7 +77,7 @@ The first defense layer is **Network Segmentation**. Using OPNsense, I configure
 ![OPNsense Interfaces](screenshots/04_opnsense_interfaces_overview.png)
 *Figure 1: Interface assignment in OPNsense ensuring physical/logical separation.*
 
-> 📘 **Detailed Guide**: See [Setup Guide](docs/SETUP_GUIDE.md) for interface configuration details.
+
 
 ---
 
